@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace TRMDataManager.Library.Internal.DataAccess
 {
-    internal class SqlDataAccess : IDisposable
+    public class SqlDataAccess : IDisposable, ISqlDataAccess
     {
 
         public SqlDataAccess(IConfiguration config)
@@ -76,7 +76,7 @@ namespace TRMDataManager.Library.Internal.DataAccess
         public void SaveDataInTransaction<T>(string storedProcedure, T parameters)
         {
             _connection.Execute(storedProcedure, parameters,
-                commandType: CommandType.StoredProcedure, transaction: _transaction);          
+                commandType: CommandType.StoredProcedure, transaction: _transaction);
         }
 
         private bool isClosed = false;
